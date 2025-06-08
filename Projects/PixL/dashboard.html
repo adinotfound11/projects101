@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PIX.L Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .card {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      color: #c084fc;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin: 0.6rem 0;
+    }
+    .logout-btn {
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #a855f7;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .logout-btn:hover {
+      background-color: #9333ea;
+    }
+  </style>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <div class="card">
+    <h2>Welcome to PIX.L</h2>
+    <p><strong>Provider:</strong> <span id="provider">Loading...</span></p>
+    <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+    <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+    <p><strong>Photo:</strong><br><img id="userPhoto" src="" width="100" style="margin-top: 10px; border-radius: 50%; display:none;" /></p>
+    <button class="logout-btn" onclick="logout()">Log Out</button>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4YStTIzkvyxNOHbvsANpWAxJWbHdPsT0",
+      authDomain: "pixl-10362.firebaseapp.com",
+      projectId: "pixl-10362",
+      storageBucket: "pixl-10362.firebasestorage.app",
+      messagingSenderId: "456566691524",
+      appId: "1:456566691524:web:253efd24c89da3838ddb91",
+      measurementId: "G-RXSV7ZKL2V"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "signin.html";
+        return;
+      }
+
+      document.getElementById("userEmail").textContent = user.email || "N/A";
+      document.getElementById("userName").textContent = user.displayName || "Not set";
+      document.getElementById("provider").textContent = user.providerData[0]?.providerId || "password";
+
+      if (user.photoURL) {
+        const img = document.getElementById("userPhoto");
+        img.src = user.photoURL;
+        img.style.display = "block";
+      }
+    });
+
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = "index.html";
+      });
+    }
+  </script>
+</body>
+</html>
