@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add User | Campus Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #31363F, #222831);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: white;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #76ABAE;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    input, select {
+      background: #fff;
+      color: #000;
+    }
+
+    button {
+      background-color: #76ABAE;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5a8f91;
+    }
+
+    .msg {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Add User (Coordinator Access)</h2>
+    <input id="email" type="email" placeholder="User Email" required />
+    <select id="role">
+      <option value="student">Student</option>
+      <option value="counselor">Counselor</option>
+    </select>
+    <button onclick="addUser()">Add User</button>
+    <div class="msg" id="statusMsg"></div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDAmmBxjhyP7AmMAGrIYMKYBZgYgankSuE",
+      authDomain: "cs-ia-d2d61.firebaseapp.com",
+      projectId: "cs-ia-d2d61",
+      storageBucket: "cs-ia-d2d61.appspot.com",
+      messagingSenderId: "920948383805",
+      appId: "1:920948383805:web:e6415cba8370ee68b98a54",
+      measurementId: "G-W65JBWWXKZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    window.addUser = async function () {
+      const email = document.getElementById("email").value.trim();
+      const role = document.getElementById("role").value;
+      const statusMsg = document.getElementById("statusMsg");
+
+      if (!email) {
+        statusMsg.textContent = "Please enter an email.";
+        return;
+      }
+
+      try {
+        const currentUser = auth.currentUser;
+        if (!currentUser) throw new Error("You must be logged in.");
+
+        const docRef = doc(db, "users", email);
+        await setDoc(docRef, { email, role });
+        statusMsg.textContent = `✅ ${role} added: ${email}`;
+      } catch (error) {
+        statusMsg.textContent = "❌ " + error.message;
+      }
+    };
+  </script>
+</body>
+</html>

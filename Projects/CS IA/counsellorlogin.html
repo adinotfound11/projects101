@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Login | Campus Connect</title>
+  <title>Counselor Login | Campus Connect</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -13,9 +13,9 @@
       --text-light: #EEEEEE;
       --error: #FF6B6B;
       --success: #38b000;
-      --card-glass: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --glass: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
       --font: 'Outfit', sans-serif;
     }
 
@@ -49,24 +49,23 @@
     }
 
     @keyframes pulseBg {
-      0%   { transform: scale(1); opacity: 1; }
+      0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(1.04); opacity: 0.85; }
     }
 
     .login-container {
       z-index: 1;
-      background: var(--card-glass);
+      background: var(--glass);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       padding: 60px 50px;
       border-radius: 24px;
       width: 90%;
       max-width: 520px;
       text-align: center;
       color: var(--text-light);
-      animation: fadeIn 1.2s ease-out;
+      animation: fadeIn 1s ease-out;
     }
 
     @keyframes fadeIn {
@@ -144,17 +143,8 @@
       .login-container {
         padding: 40px 25px;
       }
-
       .logo {
         font-size: 2.2rem;
-      }
-
-      h2 {
-        font-size: 1.4rem;
-      }
-
-      input, button {
-        font-size: 1rem;
       }
     }
   </style>
@@ -165,7 +155,7 @@
 
   <div class="login-container">
     <div class="logo">Campus Connect</div>
-    <h2>Student Login</h2>
+    <h2>Counselor Login</h2>
 
     <input type="email" id="email" placeholder="Email" />
     <input type="password" id="password" placeholder="Password" />
@@ -173,7 +163,7 @@
     <div class="message success" id="success-msg">Login successful! Redirecting...</div>
     <button onclick="login()">Login</button>
 
-    <div class="footer">Need help? Ask your counselor for access.</div>
+    <div class="footer">Need help? Contact the coordinator for access.</div>
   </div>
 
   <!-- Firebase SDK -->
@@ -206,7 +196,7 @@
         .then(() => {
           successMsg.style.display = "block";
           setTimeout(() => {
-            window.location.href = "./dashboard.html";
+            window.location.href = "./counselor/dashboard.html";
           }, 1500);
         })
         .catch(() => {

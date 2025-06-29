@@ -4,136 +4,165 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Campus Connect | Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg1: #222831;
-      --color-bg2: #31363F;
-      --color-accent: #76ABAE;
-      --color-light: #EEEEEE;
-      --color-muted: rgba(238, 238, 238, 0.7);
-      --font: 'Poppins', 'Segoe UI', sans-serif;
-      --glass: rgba(255, 255, 255, 0.04);
-      --glass-border: rgba(255, 255, 255, 0.1);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      --bg1: #222831;
+      --bg2: #31363F;
+      --accent: #76ABAE;
+      --light: #EEEEEE;
+      --muted: rgba(238, 238, 238, 0.7);
+      --font: 'Poppins', sans-serif;
+      --glass: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.1);
+      --shadow: 0 12px 48px rgba(0,0,0,0.4);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: var(--font);
-    }
-
+    *{margin:0;padding:0;box-sizing:border-box;font-family:var(--font);}
     body {
-      background: linear-gradient(135deg, var(--color-bg1), var(--color-bg2));
-      color: var(--color-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-      text-align: center;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--light);
+      position:relative;
     }
+
+    /* Particle Background */
+    .particles { position:absolute; width:100%; height:100%; z-index:0; }
 
     .container {
-      max-width: 700px;
-      width: 100%;
-      padding: 50px;
-      background: var(--glass);
-      border-radius: 20px;
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: var(--glass-shadow);
-      animation: fadeIn 0.8s ease, float 6s ease-in-out infinite alternate;
+      position:relative;
+      z-index:1;
+      max-width:700px;
+      width:90%;
+      padding:60px 50px;
+      background:var(--glass);
+      border:1px solid var(--border);
+      backdrop-filter:blur(20px);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      animation:fadeInUp 1s ease-out, floatCard 6s ease-in-out infinite alternate;
     }
 
+    /* Wave under title */
+    .wave {
+      position:absolute;
+      bottom:224px;
+      left:0; right:0;
+      width:100%;
+      height:80px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%2376ABAE" fill-opacity="0.2" d="M0,192L30,186.7C60,181,120,171,180,181.3C240,192,300,224,360,213.3C420,203,480,149,540,160C600,171,660,245,720,261.3C780,277,840,235,900,197.3C960,160,1020,128,1080,128C1140,128,1200,160,1260,186.7C1320,213,1380,235,1410,245.3L1440,256L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"/></svg>') no-repeat bottom;
+      pointer-events:none;
+    }
+
+    .icon {
+      font-size:3rem;
+      color:var(--accent);
+      margin-bottom:12px;
+    }
     h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      background: linear-gradient(to right, var(--color-accent), #ffffff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      font-size:2.8rem;
+      background:linear-gradient(to right,var(--accent),#fff);
+      -webkit-background-clip:text;
+      color:transparent;
+      margin-bottom:12px;
+      position:relative;
+    }
+    p {
+      font-size:1.2rem; color:var(--muted); margin-bottom:40px;
     }
 
-    p {
-      font-size: 1.2rem;
-      color: var(--color-muted);
-      margin-bottom: 40px;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
+    .small-label {
+      font-size:1rem; letter-spacing:1px; opacity:0.85;
+      margin-bottom:24px;
     }
 
     .role-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 30px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:40px;
     }
-
     .role-button {
-      background: var(--color-accent);
-      color: #000;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 16px rgba(118, 171, 174, 0.4);
-      position: relative;
-      overflow: hidden;
+      background:var(--accent);
+      color:#000;
+      padding:16px 36px;
+      border:none;
+      border-radius:12px;
+      font-size:1.1rem;
+      font-weight:600;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 6px 20px rgba(118,171,174,0.4);
+      transition:transform 0.2s ease,box-shadow .2s;
     }
-
+    .role-button::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle,#fff4 10%,transparent 40%);
+      opacity:0;
+      transform:scale(0);
+      transition:opacity .6s, transform .6s;
+      pointer-events:none;
+    }
     .role-button:hover {
-      transform: translateY(-3px);
-      background-color: #5a8f91;
+      transform:translateY(-4px);
+      box-shadow:0 12px 32px rgba(118,171,174,0.5);
+    }
+    .role-button:hover::after {
+      opacity:1;
+      transform:scale(3);
     }
 
     footer {
-      font-size: 0.85rem;
-      color: var(--color-muted);
-      margin-top: 20px;
+      font-size:0.9rem;
+      color:var(--muted);
+    }
+    .footer-links {
+      margin-top:8px;
+      font-size:0.85rem;
+    }
+    .footer-links a {
+      color:var(--muted);
+      margin:0 8px;
+      text-decoration:none;
+      transition:color .2s;
+    }
+    .footer-links a:hover {
+      color:var(--accent);
     }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .role-button {
-        width: 100%;
-        padding: 12px;
-      }
+    @media (max-width:480px) {
+      .role-button { width:100%; padding:14px 0; }
+      h1 { font-size:2.2rem; }
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeInUp {
+      0%{opacity:0;transform:translateY(20px);}
+      100%{opacity:1;transform:translateY(0);}
     }
-
-    @keyframes float {
-      0%   { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
+    @keyframes floatCard {
+      0%{transform:translateY(0);}
+      100%{transform:translateY(-6px);}
     }
   </style>
 </head>
 <body>
 
+  <canvas class="particles"></canvas>
+
   <div class="container">
-    <h1>Welcome to Campus Connect</h1>
+    <div class="wave"></div>
+    <div class="icon">🎓</div>
+    <h1>Campus Connect</h1>
     <p>Securely manage student applications, collaborate with counselors, and streamline the IB university process—all in one place.</p>
+    <div class="small-label">Choose your role:</div>
 
     <div class="role-buttons">
       <button class="role-button" onclick="goTo('student')">I'm a Student</button>
@@ -141,13 +170,59 @@
       <button class="role-button" onclick="goTo('coordinator')">I'm a Coordinator</button>
     </div>
 
-    <footer>© 2025 Campus Connect. Built for IB schools worldwide.</footer>
+   
   </div>
 
   <script>
+    // Role-based navigation
     function goTo(role) {
-      window.location.href = `./${role}/dashboard.html`;
+      if (role === 'student') {
+        window.location.href = './studentlogin.html';
+      } else if (role === 'counselor') {
+        window.location.href = './counselorlogin.html';
+      } else {
+        window.location.href = './coordinatorlogin.html';
+      }
     }
+
+    // Particle effect via Canvas
+    const canvas = document.querySelector('.particles');
+    const ctx = canvas.getContext('2d');
+    let w, h;
+    const particles = [];
+    function initCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    function createParticles() {
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 2 + 1,
+          dx: (Math.random() - 0.5) * 0.5,
+          dy: (Math.random() - 0.5) * 0.5,
+          alpha: Math.random() * 0.6 + 0.2
+        });
+      }
+    }
+    createParticles();
+    function animateParticles() {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach(p => {
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > w) p.dx *= -1;
+        if (p.y < 0 || p.y > h) p.dy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(174,238,238,${p.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
   </script>
 
 </body>
